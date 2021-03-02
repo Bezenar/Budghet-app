@@ -1,0 +1,29 @@
+//________________________________________________________________________________IMPORT PARTS____//
+@import "./modules/reset";
+@import "./modules/colors";
+@import "./modules/resp";
+@import "./modules/widths";
+@import "./modules/flex";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;1,700&display=swap");
+//___________________________________________________________________________________VARIABLES____//
+//___________________________________________________________________________________Container____//
+$container-width: 90%;
+$container-max-width: 1300px;
+//___________________________________________________________________________________Container____//
+//_______________________________________________________________________________________Fonts____//
+$mainFont: "Montserrat", sans-serif;
+$fontSize: 20px;
+$mainLineHeight: 20px;
+//_______________________________________________________________________________________Fonts____//
+//___________________________________________________________________________________VARIABLES____//
+body {
+  font-family: $mainFont;
+  font-size: $fontSize;
+  font-weight: normal;
+  line-height: $mainLineHeight;
+}
+.container {
+  width: $container-width;
+  max-width: $container-max-width;
+  margin: 0 auto;
+}
