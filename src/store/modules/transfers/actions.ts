@@ -60,21 +60,18 @@ export const actions: ActionTree<State, State> & Actions = {
     commit(MutationsNames.SET_CATEGORY, category);
   },
   [ActionsNames.DELETE_TRANSFER]({ dispatch }, payload: number) {
-    const transfers: string = localStorage.getItem("transfers") || "";
-    if (typeof transfers === "string") {
-      if (transfers) {
-        const parsedData: Array<Transfer> = JSON.parse(transfers);
-        const element: Transfer = parsedData.find(
-          (transfer: Transfer) => transfer.id === payload
-        );
-        const index = parsedData.indexOf(element);
-        parsedData.splice(index, 1);
-        const stringData = JSON.stringify(parsedData);
-        localStorage.removeItem("transfers");
-        localStorage.setItem("transfers", stringData);
-      }
+    const transfers = localStorage.getItem("transfers");
+    if (transfers) {
+      const parsedData: Array<Transfer> = JSON.parse(transfers);
+      const element: Transfer = parsedData.find(
+        (transfer: Transfer) => transfer.id === payload
+      );
+      const index = parsedData.indexOf(element);
+      parsedData.splice(index, 1);
+      const stringData = JSON.stringify(parsedData);
+      localStorage.removeItem("transfers");
+      localStorage.setItem("transfers", stringData);
     }
-
     dispatch(ActionsNames.GET_TRANSFERS);
   }
 };

@@ -1,28 +1,26 @@
 <template>
   <div class="transfers">
     <h3 class="transfers__heading">Transfers</h3>
-    <div class="transfers__table--head flex">
-      <div class="transfers__table__row transfers__table__row--head wid-25">
-        <div class="transfers__table__cell--head transfers__table__cell"></div>
+    <div class="transfers__table--head">
+      <div class="transfers__table__row transfers__table__row--head flex">
+        <div
+          v-for="title in tableHeadTitles"
+          :key="title"
+          class="transfers__table__cell--head
+          transfers__table__cell
+          transfers__table__cell--center-content
+          wid-25"
+        >
+          <span class="transfers__table__text--head">{{ title }}</span>
+        </div>
       </div>
-      <div class="transfers__table__row transfers__table__row--head wid-25">
-        2
-      </div>
-      <div
-        class="transfers__table__row transfers__table__head__row wid-25 start-height"
-        @click="expanded = !expanded"
-        :class="{ expandedHeight: expanded }"
-      >
-        <p data-description>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe et quam
-          nesciunt facilis ad dolores pariatur fugit, alias in, delectus
-          voluptatum possimus aspernatur ut fugiat omnis, ratione corporis sit
-          animi!
-        </p>
-      </div>
-      <div class="transfers__table__row transfers__table__head__row wid-25">
-        4
-      </div>
+    </div>
+    <div class="transfers__table--body">
+      <Transfer
+        v-for="transfer in transfers"
+        :key="transfer.id"
+        :transfer="transfer"
+      />
     </div>
   </div>
 </template>
@@ -31,11 +29,7 @@
 // Import Vue.
 import Vue from "vue";
 // Import Vue component.
-// import Transfer from "./Transfer.vue";
-// Import map.
-import { mapGetters } from "vuex";
-// Import interface.
-import { ActionsNames } from "@/store/modules/transfers/enums";
+import Transfer from "./Transfer.vue";
 
 export default Vue.extend({
   name: "TransfersTable",
@@ -44,46 +38,13 @@ export default Vue.extend({
       type: Array
     }
   },
-  components: {},
+  components: { Transfer },
   mixins: [],
   data: () => ({
-    expanded: false,
-    class: `expanded-height`
+    tableHeadTitles: ["Amount", "Category", "Description", "Configurations"]
   }),
-  computed: {
-    ...mapGetters(["getActiveFilter"]),
-    changeTableColor(): string {
-      let string;
-      switch (this.getActiveFilter) {
-        case "INCOME":
-          string = "green";
-          break;
-        case "COSTS":
-          string = "red";
-          break;
-        default:
-          string = "";
-          break;
-      }
-      return string;
-    }
-  },
-  methods: {
-    deleteTransfer(id: number) {
-      this.$store.dispatch(ActionsNames.DELETE_TRANSFER, id);
-    }
-  },
-  async mounted() {
-    const p = document.querySelector("[data-description]");
-    const expandedHeight = p.offsetHeight;
-    console.log(expandedHeight);
-    const style = document.createElement("style");
-    style.append(`.start-height {max-height: 3rem;}`);
-    style.append(
-      `.start-height.expandedHeight {max-height: ${expandedHeight}px;}`
-    );
-    document.head.appendChild(style);
-  }
+  computed: {},
+  methods: {}
 });
 </script>
 
@@ -95,31 +56,39 @@ export default Vue.extend({
   border: 2px solid $dark;
   border-radius: 15px;
   padding: 1rem calc(1rem - 12px);
-  transition: all 2s ease;
   &__heading {
     margin-bottom: 1rem;
     text-align: center;
   }
   &__table {
-    &--head {
+    &__text {
+      &--head {
+        color: $white;
+      }
     }
     &__row {
       display: flex;
-      flex: 1 0 auto;
-      transition: max-height 0.2s ease-out;
       overflow: hidden;
+      margin-bottom: 0.2rem;
+      border-radius: 5px;
       &--head {
+        background-color: rgba($blue, 0.8);
       }
     }
     &__cell {
       margin: 0.2rem;
+      padding: 0.2rem 0.1rem;
       width: 100%;
       height: auto;
       text-align: center;
+      border-radius: 5px;
+      // border: 1px solid $dark;
       &--head {
-        border: 1px solid $blue;
-        border-radius: 5px;
-        background-color: rgba($blue, 0.5);
+      }
+      &--center-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
   }

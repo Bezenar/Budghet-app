@@ -211,6 +211,7 @@ export default Vue.extend({
     }
   }
   .filter-btn {
+    margin: 0 0.2rem;
     &.active {
       background-color: $green;
       color: $white;
