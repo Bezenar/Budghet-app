@@ -25,3 +25,8 @@ export interface IconData {
   alt: string;
   title: string;
 }
+
+export interface DescriptionData {
+  extendedDescription: boolean;
+  height: number;
+}

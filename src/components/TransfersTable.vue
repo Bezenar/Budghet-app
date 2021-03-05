@@ -82,9 +82,6 @@ export default Vue.extend({
       height: auto;
       text-align: center;
       border-radius: 5px;
-      // border: 1px solid $dark;
-      &--head {
-      }
       &--center-content {
         display: flex;
         justify-content: center;

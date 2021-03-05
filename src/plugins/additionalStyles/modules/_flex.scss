@@ -28,7 +28,7 @@ $array-ac: ac-start, ac-center, ac-end, ac-stretch, ac-sa, ac-sb;
 //___________________________________________________________________JUSTIFY CONTENT MIXIN________//
 @mixin jc($jc) {
   @if ($jc == "jc-start") {
-    justify-content: start;
+    justify-content: flex-start;
   }
   @if ($jc == "jc-center") {
     justify-content: center;

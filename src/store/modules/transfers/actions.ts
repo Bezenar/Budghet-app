@@ -65,7 +65,7 @@ export const actions: ActionTree<State, State> & Actions = {
       const parsedData: Array<Transfer> = JSON.parse(transfers);
       const element: Transfer = parsedData.find(
         (transfer: Transfer) => transfer.id === payload
-      );
+      ) as Transfer;
       const index = parsedData.indexOf(element);
       parsedData.splice(index, 1);
       const stringData = JSON.stringify(parsedData);

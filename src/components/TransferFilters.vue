@@ -111,12 +111,12 @@ export default Vue.extend({
         this.categoryFilterValue
       );
     },
-    activeFilter() {
+    activeFilter(): string {
       return this.getActiveFilter;
     },
     autocompleteList(): Array<string> {
       return this.allCategorys.reduce((acc: Array<string>, cat: string) => {
-        const last: string = this.categoryFilterValue.slice("").pop();
+        const last: string = this.categoryFilterValue.slice().pop() as string;
         if (
           last.substring(0, last.length - 1).toLowerCase() ===
           cat.substring(0, last.length - 1).toLowerCase()
@@ -141,7 +141,7 @@ export default Vue.extend({
     }
   },
   methods: {
-    onChangeFilter(name: string) {
+    onChangeFilter(name: string): void {
       this.$store.commit(MutationsNames.CHANGE_FILTER, name);
     },
     pickAutocompleteListItem(value: string): void {
